@@ -303,7 +303,7 @@ const BOOL CBonTuner::SetChannel(const DWORD dwSpace, const DWORD dwChannel)
 		}
 	}
 	if(tunerNum & 0x1) {
-		if( m_selectedTuner != tunerNum || (m_dwCurChannel ^ dwChannel) >> 3 ) {
+		 if (m_dwCurSpace != dwSpace || (m_dwCurChannel ^ dwChannel) >> 3) {
 			if( tda20142_setFreq(tunerDev[1], dwFreq) ) return FALSE;
 			::Sleep( 30 );
 			if( tc90522_resetDemod(demodDev, tunerNum ) ) return FALSE;
