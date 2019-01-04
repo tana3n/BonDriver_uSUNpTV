@@ -226,7 +226,7 @@ void CBonTuner::Release()  //# release the instance
 { delete this; }
 
 LPCTSTR CBonTuner::GetTunerName(void)
-{ return TEXT("‚³‚ñ‚ÏU"); }
+{ return TEXT("Digibest US-3POUT"); }
 
 const BOOL CBonTuner::IsTunerOpening(void)
 { return m_hUsbDev ? TRUE : FALSE; }
