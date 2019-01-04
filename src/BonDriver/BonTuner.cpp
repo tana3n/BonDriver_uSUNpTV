@@ -241,7 +241,7 @@ LPCTSTR CBonTuner::EnumTuningSpace(const DWORD dwSpace)
 
 LPCTSTR CBonTuner::EnumChannelName(const DWORD dwSpace, const DWORD dwChannel)
 {
-	static TCHAR buf[6];
+	static TCHAR buf[8];
 	if(0 == dwSpace) {
 		if(m_ChannelList != NULL) {
 			//# User-defined channels
@@ -250,14 +250,14 @@ LPCTSTR CBonTuner::EnumChannelName(const DWORD dwSpace, const DWORD dwChannel)
 			TCHAR* const ptrStr = (TCHAR*)(m_ChannelList + dwNumOfChannels + 1);
 			if(dwChannel < dwNumOfChannels)	return ptrStr + (dwChannelLen * dwChannel);
 		}else if(dwChannel < 40) {
-			_sntprintf_s(buf, sizeof(buf)/sizeof(TCHAR), _TRUNCATE, TEXT("%u"), dwChannel + 13);
+			_sntprintf_s(buf, sizeof(buf)/sizeof(TCHAR), _TRUNCATE, TEXT("UHF%uch"), dwChannel + 13);
 			return buf;    //# The caller must copy data from this buffer.
 		}
 	}else if(1 == dwSpace && dwChannel < 12 * 8) {
-		_sntprintf_s(buf, sizeof(buf)/sizeof(TCHAR), _TRUNCATE, TEXT("%02u.%u"), (dwChannel >> 3)*2 + 1, dwChannel & 0x7);
+		_sntprintf_s(buf, sizeof(buf)/sizeof(TCHAR), _TRUNCATE, TEXT("BS%02u/%02u"), (dwChannel >> 3)*2 + 1, dwChannel & 0x7);
 		return buf;
 	}else if(2 == dwSpace && dwChannel < 12 * 8) {
-		_sntprintf_s(buf, sizeof(buf)/sizeof(TCHAR), _TRUNCATE, TEXT("%02u.%u"), (dwChannel >> 3)*2 + 2, dwChannel & 0x7);
+		_sntprintf_s(buf, sizeof(buf)/sizeof(TCHAR), _TRUNCATE, TEXT("ND%02u/%02u"), (dwChannel >> 3)*2 + 2, dwChannel & 0x7);
 		return buf;
 	}
 	return NULL;
