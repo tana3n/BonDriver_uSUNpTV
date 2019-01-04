@@ -253,11 +253,12 @@ LPCTSTR CBonTuner::EnumChannelName(const DWORD dwSpace, const DWORD dwChannel)
 			_sntprintf_s(buf, sizeof(buf)/sizeof(TCHAR), _TRUNCATE, TEXT("UHF%uch"), dwChannel + 13);
 			return buf;    //# The caller must copy data from this buffer.
 		}
-	}else if(1 == dwSpace && dwChannel < 12 * 8) {
-		_sntprintf_s(buf, sizeof(buf)/sizeof(TCHAR), _TRUNCATE, TEXT("BS%02u/%02u"), (dwChannel >> 3)*2 + 1, dwChannel & 0x7);
-		return buf;
-	}else if(2 == dwSpace && dwChannel < 12 * 8) {
-		_sntprintf_s(buf, sizeof(buf)/sizeof(TCHAR), _TRUNCATE, TEXT("ND%02u/%02u"), (dwChannel >> 3)*2 + 2, dwChannel & 0x7);
+	}else if(1 == dwSpace && dwChannel < 12 * 4) {
+		_sntprintf_s(buf, sizeof(buf)/sizeof(TCHAR), _TRUNCATE, TEXT("BS%02u/%02u"), (dwChannel >> 2)*2 + 1, dwChannel & 0x3);
+				return buf;
+	}else if(2 == dwSpace && dwChannel < 12 * 4) {
+		_sntprintf_s(buf, sizeof(buf)/sizeof(TCHAR), _TRUNCATE, TEXT("ND%02u/%02u"), (dwChannel >> 2)*2 + 2, dwChannel & 0x3);
+
 		return buf;
 	}
 	return NULL;
@@ -278,10 +279,10 @@ const BOOL CBonTuner::SetChannel(const DWORD dwSpace, const DWORD dwChannel)
 			if(dwChannel < 40)
 				dwFreq = dwChannel * 6000 + 473143;
 		}
-	}else if(1 == dwSpace && dwChannel < 12 * 8) {
-		dwFreq = (dwChannel >> 3) * 38360 + 1049480;
-	}else if(2 == dwSpace && dwChannel < 12 * 8) {
-		dwFreq = (dwChannel >> 3) * 40000 + 1613000;
+	}else if(1 == dwSpace && dwChannel < 12 * 4) {
+		dwFreq = (dwChannel >> 2) * 38360 + 1049480;
+	}else if(2 == dwSpace && dwChannel < 12 * 4) {
+		dwFreq = (dwChannel >> 2) * 40000 + 1613000;
 	}else if(dwSpace == 114514) {  //# dwChannel as freq/kHz
 		dwFreq = dwChannel;
 	}
@@ -303,7 +304,7 @@ const BOOL CBonTuner::SetChannel(const DWORD dwSpace, const DWORD dwChannel)
 		}
 	}
 	if(tunerNum & 0x1) {
-		 if (m_dwCurSpace != dwSpace || (m_dwCurChannel ^ dwChannel) >> 3) {
+		 if (m_dwCurSpace != dwSpace || (m_dwCurChannel ^ dwChannel) >> 2) {
 			if( tda20142_setFreq(tunerDev[1], dwFreq) ) return FALSE;
 			::Sleep( 30 );
 			if( tc90522_resetDemod(demodDev, tunerNum ) ) return FALSE;
@@ -312,7 +313,7 @@ const BOOL CBonTuner::SetChannel(const DWORD dwSpace, const DWORD dwChannel)
 		DWORD dwTime = ::GetTickCount() + 800;
 		hasStream = FALSE;
 		do {
-			int ret = tc90522_selectStream(demodDev, tunerNum, dwChannel & 0x7 );
+			int ret = tc90522_selectStream(demodDev, tunerNum, dwChannel & 0x3 );
 			if(0 == ret) {
 				hasStream = TRUE;
 				break;
