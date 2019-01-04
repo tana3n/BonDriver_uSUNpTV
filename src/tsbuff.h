@@ -9,7 +9,7 @@
 #define TS_BufSize  3670016
 
 //# max number of submitted IO requests
-#define TS_MaxNumIO  24
+#define TS_MaxNumIO  256
 //# IO polling timeout (msec)
 #define TS_PollTimeout  100
 
