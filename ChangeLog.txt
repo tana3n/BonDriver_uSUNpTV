@@ -1,0 +1,45 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
+
+# ChangeLog  BonDriver_uSUNpTV
+
+0.1.3	2016-02-19
+	Fixed small bugs  [tsthread.c]
+
+
+0.1.2	2016-02-11
+	first release
+	modified and simplified CNR calc function  [tc90522.c]
+	For stability, increased waiting time for tuning.  [BonTuner.cpp/SetChannel()]
+
+
+0.1.0	2016-02-04
+	preview ver.
+	Added: check transfer mode  [tsthread.c]
+
+
+0.0.7	2016-01-18
+	BonDriver_uSUNpTV preview ver.
+	Added: set TSID for BS/CS
+	Added: ISDB-T Tuner function is implemented.
+
+
+0.0.5	2016-01-13
+	unit test
+	Only BS/CS Tuner function is implemented.
+
+
+
+## End
+signed by "trinity19683.gpg-pub" 2015-12-13
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iQEcBAEBCAAGBQJWxuzjAAoJEB0tpC02lUUYUF4IAJ2Isl9imAIVfKjbgkwM29wC
+puo4pvDH7v1123Il2xht0hQWQevIxY4/tH85sySrQzNF8HzMIPTGr4dpaEfES7JR
+NfU58d14doqObUM0SnUbXvBO2nqKOooIgCYMEoCVM4yel2av5wZE/7z5jks2ljoV
+aS5vbZS6Y0+tZywjrdkzE99efQD1M31yuF+V2/XxaRygPfLxdorejORNYUn+Xvm3
+sQ+qNJLDTdW0e00XFkWmJ6RAFVdaFVFai0GSwCOnkGV/bpZn7Nip+/+9iddzvBsw
+Ncx/xXg17kw4REWKI4Oz/RqRmEtZWDU5UtPe08CsvfOZhpjY+2sVTx1ZcP3roLY=
+=RlDw
+-----END PGP SIGNATURE-----
