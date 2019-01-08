@@ -11,6 +11,6 @@
 //# max number of submitted IO requests
 #define TS_MaxNumIO  256
 //# IO polling timeout (msec)
-#define TS_PollTimeout  100
+#define TS_PollTimeout  1000
 
 /*EOF*/
